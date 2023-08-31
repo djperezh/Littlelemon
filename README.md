@@ -1,6 +1,7 @@
 # Littlelemon
 Example application in Python using Django Framework
-Coursera: [Meta API](https://www.coursera.org/learn/apis?specialization=meta-back-end-developer)
+
+By Coursera: [Meta API](https://www.coursera.org/learn/apis?specialization=meta-back-end-developer)
 
 ## Requirements
 * Python
