@@ -1,3 +1,6 @@
 LittleLemon/__pypchache__/
 LittleLemon/DRF/__pypchache__/
 LittleLemon/DRF/migrations/__pypchache__/
+LittleLemon/__pycache__/*
+LittleLemonDRF/__pycache__/*
+LittleLemonDRF/migrations/__pycache__/*
