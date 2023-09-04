@@ -13,9 +13,9 @@ class MenuItemSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
     class Meta:
         model = MenuItem
-        fields = ["id","title","price","inventory","category","category_id"]
+        fields = ["id","title","price", "featured", "inventory","category","category_id"]
         extra_kwargs = {
-            "price": {"min_value": 2},
+            "price": {"min_value": 0},
             "inventory":{"min_value":0}
         }
 
@@ -30,9 +30,6 @@ class CartSerializer(serializers.ModelSerializer):
         model = Cart
         fields = ["id", "user", "menuitem_id", "menuitem", "quantity", "price", "subtotal"]
         read_only_fields = ["user", "menuitem", "price", "subtotal"]
-        # extra_kwargs = {
-        #     "quantity": {"min_value": 1},
-        # }
         
     def get_subtotal(self, cart:Cart):
         subtotal = round(cart.menuitem.price * cart.quantity, 2)

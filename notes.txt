@@ -1,5 +1,7 @@
-User Name           Email                           Password        token
+Username           Email                           Password        token
 
+admin                                               littlelemon     69a56b2504f4737950d8b22414eac575b0a5e0c7
 admin_littlelemon   admin@littlelemon.com           littlelemon	    61cc1dbe55b6c5cf8e577d30949d8ad70ef30ccd
 deliverycrew        deliverycrew@littlelemon.com	littlelemon     e4361f703a66ad190a752096317d7008cb63e86f
 manager             manager@littlelemon.com         littlelemon     7a595264304803f6026be57322ec3edf734afed0
+customer_user                                       test_1234!      f16898b3f8ef3db8832bb9eba680313e7ce86292

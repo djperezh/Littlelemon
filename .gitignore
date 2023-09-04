@@ -1,3 +1,7 @@
+# Django
 LittleLemon/__pycache__/*
 LittleLemonDRF/__pycache__/*
 LittleLemonDRF/migrations/__pycache__/*
+
+# VS Code
+.vscode/launch.json

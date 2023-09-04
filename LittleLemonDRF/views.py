@@ -1,15 +1,15 @@
+from datetime import date
+from django.contrib.auth.models import User, Group
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, status
 from rest_framework import viewsets
-from .models import MenuItem, Category, Cart, Order, OrderItem
-from .paginations import MenuItemListPagination
-from .serializers import MenuItemSerializer, CategorySerializer, CartSerializer, OrderSerializer, OrderItemSerializer, UserSerializer
 from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from .permissions import ( IsAdmin, IsManager, IsDeliveryCrew, IsCustomer, IsCustomerAndOwner, IsDeliveryCrewAndOwner, ReadOnly,)
-from datetime import date
-from django.contrib.auth.models import User, Group
+from .models import MenuItem, Category, Cart, Order, OrderItem
+from .paginations import MenuItemListPagination
+from .permissions import ( IsAdmin, IsManager, IsDeliveryCrew, IsCustomer, IsCustomerAndOwner, IsDeliveryCrewAndOwner, ReadOnly)
+from .serializers import MenuItemSerializer, CategorySerializer, CartSerializer, OrderSerializer, OrderItemSerializer, UserSerializer
 
 # {url}/api/category
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -69,7 +69,7 @@ class CartView(generics.ListCreateAPIView, generics.DestroyAPIView):
         serialized_item = self.get_serializer(data=request.data, many=True)
         serialized_item.is_valid(raise_exception=True)
         serialized_item.save(user=self.request.user)
-        return Response({"message": f"{serialized_item.data['menuitem']} was successfully added to the cart for {request.user.username}"}, status=status.HTTP_201_CREATED)
+        return Response({"message": f"Item was successfully added to the cart for {request.user.username}"}, status=status.HTTP_201_CREATED)
     
     # DELETE
     def delete(self, request, *args, **kwargs):
@@ -96,7 +96,6 @@ class CartItemView(generics.RetrieveUpdateDestroyAPIView):
 # {url}/api/orders
 class OrdersView(generics.ListCreateAPIView):
     serializer_class = OrderSerializer
-    # filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ["status", "date", "delivery_crew"]
     ordering_fields = ["id", "delivery_crew", "total", "date"]
     permission_classes = [IsAuthenticated]
@@ -115,16 +114,17 @@ class OrdersView(generics.ListCreateAPIView):
     # POST
     def post(self, request, *args, **kwargs):
         cart = Cart.objects.filter(user=request.user)
+        date = request.data["date"]
 
         if cart.exists():
             total = 0
-            order = Order.objects.create(user=request.user, status=False, total=total, date=date.today)
+            order = Order.objects.create(user=request.user, status=False, total=total, date=date)
 
             for cart_item in cart.values():
                 menuitem = get_object_or_404(MenuItem, id=cart_item["menuitem_id"])
                 order_item = OrderItem.objects.create(order=order, menuitem=menuitem, quantity=cart_item["quantity"])
                 order_item.save()
-                total += float(menuitem.price) * cart_item["quantity"]
+                total += float(menuitem.price) * float(cart_item["quantity"])
 
             order.total = total
             order.save()
@@ -138,7 +138,6 @@ class OrdersView(generics.ListCreateAPIView):
 class OrderItemView(generics.ListAPIView, generics.RetrieveUpdateDestroyAPIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
     serializer_class = OrderItemSerializer
-    # filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     filterset_fields = ["menuitem", "order__status", "order__delivery_crew"]
     ordering_fields = ["id", "menuitem", "menuitem__price", "order__status", "order__delivery_crew"]
     search_fields = ["menuitem", "order__status", "order__delivery_crew"]
@@ -199,12 +198,11 @@ class OrderItemView(generics.ListAPIView, generics.RetrieveUpdateDestroyAPIView)
 
         return Response({"message": f"Order {order_number} was successfully deleted for {request.user.username}"}, status=status.HTTP_200_OK)
 
-
 class ManagerPostView(generics.ListCreateAPIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
     queryset = User.objects.filter(groups__name="Manager")
     serializer_class = UserSerializer
-    permission_classes = [IsAdmin]
+    permission_classes = [IsManager] # [IsAdmin]
 
     # POST
     def post(self, request, *args, **kwargs):
@@ -248,7 +246,7 @@ class ManagerDeleteView(generics.RetrieveDestroyAPIView):
     
 class DeliveryCrewPostView(generics.ListCreateAPIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
-    queryset = User.objects.filter(groups__name="Delivery Crew")
+    queryset = User.objects.filter(groups__name="DeliveryCrew")
     serializer_class = UserSerializer
     permission_classes = [IsManager | IsAdmin]
 
@@ -257,7 +255,7 @@ class DeliveryCrewPostView(generics.ListCreateAPIView):
         username = request.data["username"]
         if username:
             user = get_object_or_404(User, username=username)
-            delivery_crews = Group.objects.get(name="Delivery Crew")
+            delivery_crews = Group.objects.get(name="DeliveryCrew")
 
             if (
                 user.groups.count() == 0
@@ -276,16 +274,16 @@ class DeliveryCrewPostView(generics.ListCreateAPIView):
     
 class DeliveryCrewDeleteView(generics.RetrieveDestroyAPIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
-    queryset = User.objects.filter(groups__name="Delivery Crew")
+    queryset = User.objects.filter(groups__name="DeliveryCrew")
     serializer_class = UserSerializer
     permission_classes = [IsManager | IsAdmin]
 
     # DELETE
     def delete(self, request, *args, **kwargs):
         user = get_object_or_404(User, pk=kwargs["pk"])
-        delivery_crews = Group.objects.get(name="Delivery Crew")
+        delivery_crews = Group.objects.get(name="DeliveryCrew")
         delivery_crews.user_set.remove(user)
-        if user.groups.count() == 0 and user.is_staff == True:
+        if user.groups.count() == 0 and user.is_staff == True and user.is_superuser == False:
             # remove status = Staff and save changes
             user.is_staff = False
             user.save()
