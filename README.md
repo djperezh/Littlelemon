@@ -47,6 +47,8 @@ By Coursera: [Meta API](https://www.coursera.org/learn/apis?specialization=meta-
 
 21.	Customers can browse their own orders
 
+NOTE: See [Rubric](/docs/rubric.md) for more details.
+
 ## Endpoints
 
 ![Menu Items Endpoints](/docs/imgs/menu-items.png "Menu Items Endpoints")
