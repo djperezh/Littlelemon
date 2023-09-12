@@ -1,9 +1,46 @@
 # Littlelemon
 Example application in Python using Django Framework
 
-By Coursera: [Meta API](https://www.coursera.org/learn/apis?specialization=meta-back-end-developer)
+By Coursera:
+* [Meta - API](https://www.coursera.org/learn/apis?specialization=meta-back-end-developer)
 
-# Functional requirement
+* [Meta - The Full Stack](https://www.coursera.org/learn/the-full-stack)
+
+# FrontEnd (Booking) Functional requirement
+
+1. Is the app added to the installed apps list in the settings file?
+
+2. Is the database configuration updated inside the settings file?
+
+3. Were migrations performed?
+
+4. Are there three fields in the booking form: First name, Reservation date and Reservation slot?
+
+5. Does a date selector open up when you click on the reservation date field on the booking form?
+
+6. Are all the bookings available as JSON data on the reservations page?
+
+7. Is duplicate booking prohibited on a specific date if the time is already booked?
+
+8. Does changing the date refresh the booking data?
+
+9. Is a duplicate booking on a specific date and time unavailable if the slot is already booked? 
+
+10. Can you display bookings for a specific date using the API?
+
+11. If there is no booking, does a No Booking message show for that date?
+
+12. Was fetch API used to retrieve data from the API?
+
+13. Is the current date automatically selected when you open the booking form?
+
+## Screeshots
+
+![Book & Reservations](/docs/imgs/bookings.png "Book & Reservations")
+
+### [Run locally - Setup](/docs/run-setup.md)
+
+# BackEnd (API) Functional requirement
 
 1. The admin can assign users to the manager group
 
@@ -68,6 +105,6 @@ NOTE: See [Rubric](/docs/rubric.md) for more details.
 * This enpoins should handle errors by returning the corresponding HTTP status code
 ![HTTP status code](/docs/imgs/errors.png "HTTP status code")
 
-# [Run locally - Setup](/docs/run-setup.md)
+### [Run locally - Setup](/docs/run-setup.md)
 
-# [Development - Setup](/docs/dev-setup.md)
+### [Development - Setup](/docs/dev-setup.md)
