@@ -9,7 +9,7 @@
     <div class="row">
       <!--Begin col-->
       <div class="column">
-        <form action="" method="post">
+        <form action="" method="post" id="form">
           {% csrf_token %}
           {{form.as_p}}
           <input type="submit" id="button">
@@ -18,34 +18,33 @@
       <!--End col-->
       <!--Begin col-->
       <div class="column">
-        <h1>Bookings for {{date_filter}}</h1>
-        {% csrf_token %}
-        {%for item in reservations %}
-        <p>
-          {{ item.name }} -
-          {% if item.time == "1" %} 10am {% endif %}
-          {% if item.time == "2" %} 11am {% endif %}
-          {% if item.time == "3" %} 12pm {% endif %}
-          {% if item.time == "4" %} 1pm {% endif %}
-          {% if item.time == "5" %} 2pm {% endif %}
-          {% if item.time == "6" %} 3pm {% endif %}
-          {% if item.time == "7" %} 4pm {% endif %}
-          {% if item.time == "8" %} 5pm {% endif %}
-          {% if item.time == "9" %} 6pm {% endif %}
-          {% if item.time == "10" %} 7pm {% endif %}
-          {% if item.time == "11" %} 8pm {% endif %}
-        </p>
-        {% endfor %}
-        {{reservations.len}}
-        {% if reservations.len == 0 %} No Bookins {% endif %}
+        <input type=hidden value={{date_filter}} id="date_value">
+        {% if flag %}
+          <h1>Bookings for {{date_filter}}</h1>
+          {%for item in reservations %}
+          <p>
+            {{ item.name }} -
+            {% if item.time == "1" %} 10am {% endif %}
+            {% if item.time == "2" %} 11am {% endif %}
+            {% if item.time == "3" %} 12pm {% endif %}
+            {% if item.time == "4" %} 1pm {% endif %}
+            {% if item.time == "5" %} 2pm {% endif %}
+            {% if item.time == "6" %} 3pm {% endif %}
+            {% if item.time == "7" %} 4pm {% endif %}
+            {% if item.time == "8" %} 5pm {% endif %}
+            {% if item.time == "9" %} 6pm {% endif %}
+            {% if item.time == "10" %} 7pm {% endif %}
+            {% if item.time == "11" %} 8pm {% endif %}
+          </p>
+          {% endfor %}
+        {% else %}
+          <h1>No Bookins</h1>
+        {% endif %}
       </div>
       <!--End col-->
     </div>
     <!--End row-->
-
-
-
-
   </article>
 </section>
 {% endblock %}
+

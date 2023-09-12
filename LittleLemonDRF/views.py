@@ -2,9 +2,9 @@ from datetime import date
 from django.contrib.auth.models import User, Group
 from django.core.serializers import serialize
 from django.shortcuts import get_object_or_404, render
-from django.http import JsonResponse
+# from django.http import JsonResponse
 from rest_framework import generics, status
-from rest_framework.decorators import api_view, renderer_classes
+# from rest_framework.decorators import api_view, renderer_classes
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
@@ -27,30 +27,41 @@ def about(request):
 
 def book(request):
     form = BookingForm()
+    date_filter = str(date.today())
+    flag = False
     
     # POST
     if request.method == 'POST':
         form = BookingForm(request.POST)
+        date_filter = request.POST.get('date', None)
         if form.is_valid():
-            form.save()
-            temp = form.cleaned_data.get("date")
-            print(form.cleaned_data.get("name") + "-"  + str(temp) + ":"  + form.cleaned_data.get("time"))
-    
-    #GET
+            form.save()            
+            date_filter = request.POST.get('date', None)
+
+    # GET
     if request.method == "GET":
         if request.GET.get('date', None):
             date_filter = request.GET.get('date', None)
-            reservations = Booking.objects.filter(date=date_filter)
-            context = {'form': form, 'reservations': reservations, 'date_filter': date_filter}
-            return render(request, 'book.html', context)
-    
-    context = {'form':form}
+        
+    reservations = Booking.objects.filter(date=date_filter)
+    if reservations.count() > 0:
+        flag = True
+        
+    context = {'form': form, 'reservations': reservations, 'date_filter': date_filter, 'flag':flag}
+
     return render(request, 'book.html', context)
 
-
-def reservations(request):
+def bookings(request):
+    # GET
     content = Booking.objects.all()
-    reservations = json.loads(serialize("json", content))
+    
+    if request.method == "GET":
+        if request.GET.get('date', None):
+            content = Booking.objects.filter(date=request.GET.get('date', None))
+        else:
+            content = Booking.objects.all()
+            
+    reservations = json.loads(serialize("json", content))        
     json_pretty = json.dumps(reservations, indent=4)
     context = {"reservations": json_pretty}
     return render(request, "reservations.html", context)

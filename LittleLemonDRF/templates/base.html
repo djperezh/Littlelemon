@@ -46,3 +46,22 @@
     {% include 'partials/_footer.html' %}
   </body>
 </html>
+
+
+<script>
+  var dateValue;
+  var dateInput = document.getElementById("id_date");
+  dateInput.addEventListener('input', dateListener);
+
+  function dateListener(e) {
+    if (dateValue === e.target.value) return
+    dateValue = e.target.value;
+    window.location.replace('/book?date=' + dateValue);
+  }
+
+  window.onload = (event) => {
+    var dateInput = document.getElementById("id_date");
+    var dateValue = document.getElementById("date_value");
+    if (dateValue && dateValue.value) dateInput.value = dateValue.value;
+  };
+</script>

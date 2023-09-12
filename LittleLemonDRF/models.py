@@ -54,11 +54,15 @@ class OrderItem(models.Model):
         return str(self.order) + " - " + str(self.menuitem)
     
 class Booking(models.Model):
-   name = models.CharField(max_length=100, db_index=True, blank=None, null=None)    
-   date = models.DateField(db_index=True, blank=None, null=None)
-   time = models.CharField(max_length=4)
+    name = models.CharField(max_length=100, db_index=True, blank=None, null=None)    
+    date = models.DateField(db_index=True, blank=None, null=None)
+    time = models.CharField(max_length=4)
 
-   def __str__(self):
+    # This will handle dupes
+    class Meta:
+        unique_together = ('date', 'time')
+        
+    def __str__(self):
       return self.name
   
 class Menu(models.Model):

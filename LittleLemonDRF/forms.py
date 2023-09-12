@@ -24,7 +24,8 @@ class BookingForm(ModelForm):
         'type': 'date',
         'placeholder': 'yyyy-mm-dd',
         'class': 'form-control',
-        'required': 'required'
+        'required': 'required',
+        "onClick": "dateListener();"
     })
     
     # date = DateInput()
@@ -35,10 +36,10 @@ class BookingForm(ModelForm):
         widgets = {
             "date": DateInput(
                 attrs={
-                    'type': 'date',
-                    'placeholder': 'yyyy-mm-dd',
-                    'class': 'form-control',
-                    'required': 'required'
+                    "type": "date",
+                    "placeholder": "yyyy-mm-dd",
+                    "class": "form-control",
+                    "required": "required"
                 }
             ),
             # "time": ChoiceField(choices=CHOICES)
