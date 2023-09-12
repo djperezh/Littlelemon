@@ -1,15 +1,72 @@
 from datetime import date
 from django.contrib.auth.models import User, Group
-from django.shortcuts import get_object_or_404
+from django.core.serializers import serialize
+from django.shortcuts import get_object_or_404, render
+from django.http import JsonResponse
 from rest_framework import generics, status
+from rest_framework.decorators import api_view, renderer_classes
 from rest_framework import viewsets
 from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from .models import MenuItem, Category, Cart, Order, OrderItem
+from .forms import BookingForm, ReservationsForm
+from .models import MenuItem, Category, Cart, Order, OrderItem, Menu, Booking
 from .paginations import MenuItemListPagination
 from .permissions import ( IsAdmin, IsManager, IsDeliveryCrew, IsCustomer, IsCustomerAndOwner, IsDeliveryCrewAndOwner, ReadOnly)
 from .serializers import MenuItemSerializer, CategorySerializer, CartSerializer, OrderSerializer, OrderItemSerializer, UserSerializer
+
+import json
+
+# Navigation (Static pages)
+def home(request):
+    return render(request, 'index.html')
+
+def about(request):
+    return render(request, 'about.html')
+
+def book(request):
+    form = BookingForm()
+    
+    # POST
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            temp = form.cleaned_data.get("date")
+            print(form.cleaned_data.get("name") + "-"  + str(temp) + ":"  + form.cleaned_data.get("time"))
+    
+    #GET
+    if request.method == "GET":
+        if request.GET.get('date', None):
+            date_filter = request.GET.get('date', None)
+            reservations = Booking.objects.filter(date=date_filter)
+            context = {'form': form, 'reservations': reservations, 'date_filter': date_filter}
+            return render(request, 'book.html', context)
+    
+    context = {'form':form}
+    return render(request, 'book.html', context)
+
+
+def reservations(request):
+    content = Booking.objects.all()
+    reservations = json.loads(serialize("json", content))
+    json_pretty = json.dumps(reservations, indent=4)
+    context = {"reservations": json_pretty}
+    return render(request, "reservations.html", context)
+
+def menu(request):
+    menu_data = Menu.objects.all()
+    main_data = {"menu": menu_data}
+    return render(request, 'menu.html', {"menu": main_data})
+
+def display_menu_item(request, pk=None):
+    if pk:
+        menu_item = Menu.objects.get(pk=pk)
+    else:
+        menu_item = ""
+    return render(request, 'menu_item.html', {"menu_item": menu_item})
+
 
 # {url}/api/category
 class CategoryViewSet(viewsets.ModelViewSet):

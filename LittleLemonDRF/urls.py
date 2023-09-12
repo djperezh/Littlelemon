@@ -7,7 +7,13 @@ router.register("categories", views.CategoryViewSet, basename="categories")
 router.register("menu-items", views.MenuItemViewSet, basename="menu-items")
 
 urlpatterns = [
-    path("", include(router.urls)),
+    path("", views.home, name="home"),
+    path("about", views.about, name="about"),
+    path("book", views.book, name="book"),
+    path("reservations", views.reservations, name="reservations"),
+    path("menu", views.menu, name="menu"),
+    
+    path("api/", include(router.urls)),
     path("cart/menu-items", views.CartView.as_view(), name="cart"),
     path("cart/menu-items/<int:pk>", views.CartItemView.as_view(), name="cart-detail"),
     path("cart/orders", views.OrdersView.as_view(), name="orders"),

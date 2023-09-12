@@ -52,3 +52,19 @@ class OrderItem(models.Model):
     
     def __str__(self):
         return str(self.order) + " - " + str(self.menuitem)
+    
+class Booking(models.Model):
+   name = models.CharField(max_length=100, db_index=True, blank=None, null=None)    
+   date = models.DateField(db_index=True, blank=None, null=None)
+   time = models.CharField(max_length=4)
+
+   def __str__(self):
+      return self.name
+  
+class Menu(models.Model):
+   name = models.CharField(max_length=200) 
+   price = models.IntegerField(null=False) 
+   menu_item_description = models.TextField(max_length=1000, default='') 
+
+   def __str__(self):
+      return self.name

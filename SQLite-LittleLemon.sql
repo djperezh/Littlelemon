@@ -1,4 +1,10 @@
 -- SQLite
+/***********
+BOOKINGS
+***********/
+--DELETE FROM 'LittleLemonDRF_booking';
+--DELETE FROM sqlite_sequence where name='LittleLemonDRF_booking';
+SELECT * FROM 'LittleLemonDRF_booking';
 
 /***********
 CART

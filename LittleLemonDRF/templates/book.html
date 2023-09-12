@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section>
+  <article>
+    <h1>Make a reservation</h1>
+    <!--Begin row-->
+    <div class="row">
+      <!--Begin col-->
+      <div class="column">
+        <form action="" method="post">
+          {% csrf_token %}
+          {{form.as_p}}
+          <input type="submit" id="button">
+        </form>
+      </div>
+      <!--End col-->
+      <!--Begin col-->
+      <div class="column">
+        <h1>Bookings for {{date_filter}}</h1>
+        {% csrf_token %}
+        {%for item in reservations %}
+        <p>
+          {{ item.name }} -
+          {% if item.time == "1" %} 10am {% endif %}
+          {% if item.time == "2" %} 11am {% endif %}
+          {% if item.time == "3" %} 12pm {% endif %}
+          {% if item.time == "4" %} 1pm {% endif %}
+          {% if item.time == "5" %} 2pm {% endif %}
+          {% if item.time == "6" %} 3pm {% endif %}
+          {% if item.time == "7" %} 4pm {% endif %}
+          {% if item.time == "8" %} 5pm {% endif %}
+          {% if item.time == "9" %} 6pm {% endif %}
+          {% if item.time == "10" %} 7pm {% endif %}
+          {% if item.time == "11" %} 8pm {% endif %}
+        </p>
+        {% endfor %}
+        {{reservations.len}}
+        {% if reservations.len == 0 %} No Bookins {% endif %}
+      </div>
+      <!--End col-->
+    </div>
+    <!--End row-->
+
+
+
+
+  </article>
+</section>
+{% endblock %}
