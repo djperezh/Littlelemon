@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "LittleLemonDRF",
     "rest_framework",
     "rest_framework.authtoken",
+    "restaurant",
     "djoser",
 ]
 
@@ -58,7 +58,7 @@ ROOT_URLCONF = "LittleLemon.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["LittleLemonDRF/templates"],
+        "DIRS": ["restaurant/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -129,10 +129,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "LittleLemonDRF/static/"
+STATIC_URL = "restaurant/static/"
 
 STATICFILES_DIRS = [
-    "LittleLemonDRF/static",
+    "restaurant/static",
 ]
 
 # Default primary key field type
