@@ -14,7 +14,7 @@ from .forms import BookingForm, ReservationsForm
 from .models import MenuItem, Category, Cart, Order, OrderItem, Menu, Booking
 from .paginations import MenuItemListPagination
 from .permissions import ( IsAdmin, IsManager, IsDeliveryCrew, IsCustomer, IsCustomerAndOwner, IsDeliveryCrewAndOwner, ReadOnly)
-from .serializers import MenuItemSerializer, CategorySerializer, CartSerializer, OrderSerializer, OrderItemSerializer, UserSerializer
+from .serializers import MenuItemSerializer, CategorySerializer, CartSerializer, OrderSerializer, OrderItemSerializer, UserSerializer, BookingSerializer
 
 import json
 
@@ -25,6 +25,7 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+# {url}/restaurant/book
 def book(request):
     form = BookingForm()
     date_filter = str(date.today())
@@ -51,6 +52,7 @@ def book(request):
 
     return render(request, 'book.html', context)
 
+# {url}/restaurant/bookings (Reservations list using JSON)
 def bookings(request):
     # GET
     content = Booking.objects.all()
@@ -66,6 +68,23 @@ def bookings(request):
     context = {"reservations": json_pretty}
     return render(request, "reservations.html", context)
 
+# {url}/restaurant/api/tables (Django generated)
+class BookingsViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = BookingSerializer
+    
+    # GET
+    def get_queryset(self):
+        return Booking.objects.all()
+
+    # POST
+    def create(self, request): # Here is the new update comes <<<<
+        booking = Booking.objects.create(name=request.POST.get('name'), guests=request.POST.get('guests'), date=request.POST.get('date'), time=request.POST.get('time'))
+        booking.save()
+        
+        # do something with post data
+        return Response({"message": f"{str(booking.name)} was booked"}, status=status.HTTP_201_CREATED)
+    
 def menu(request):
     menu_data = Menu.objects.all()
     main_data = {"menu": menu_data}
@@ -73,6 +92,7 @@ def menu(request):
 
 # {url}/restaurant/menu
 class MenuItemsView(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
     serializer_class = MenuItemSerializer
     
     # GET
@@ -102,7 +122,7 @@ def display_menu_item(request, pk=None):
         menu_item = ""
     return render(request, 'menu_item.html', {"menu_item": menu_item})
 
-# {url}/restaurant/api/categories
+# {url}/restaurant/api/categories (Django generated)
 # {url}/api/category
 class CategoryViewSet(viewsets.ModelViewSet):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
@@ -119,7 +139,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
             permission_classes = [IsAuthenticated, IsAdminUser]
         return [permission() for permission in permission_classes]
     
-# {url}/restaurant/api/menu-items
+# {url}/restaurant/api/menu-items (Django generated)
 class MenuItemViewSet(viewsets.ModelViewSet):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
     queryset = MenuItem.objects.all()
@@ -146,7 +166,7 @@ class MenuItemViewSet(viewsets.ModelViewSet):
 
         return Response({"message": f"Featured status of {str(menuitem.title)} was changed to {str(menuitem.featured)}"}, status=status.HTTP_200_OK)    
     
-# {url}/api/cart/menu-items
+# {url}/restaurant/cart/menu-items
 class CartView(generics.ListCreateAPIView, generics.DestroyAPIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
     serializer_class = CartSerializer
@@ -167,7 +187,7 @@ class CartView(generics.ListCreateAPIView, generics.DestroyAPIView):
     def delete(self, request, *args, **kwargs):
         return Response({"message": f"Cart was successfully emptied for {request.user.username}"}, status=status.HTTP_200_OK)
     
-# {url}/api/cart/menu-items/{menuitem_id}
+# {url}/restaurant/cart/menu-items/{menuitem_id}
 class CartItemView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CartSerializer
     permission_classes = [IsAuthenticated]

@@ -1,12 +1,17 @@
 from django.urls import path, include
 from . import views
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken.views import obtain_auth_token
 
 router = DefaultRouter(trailing_slash=False)
 router.register("categories", views.CategoryViewSet, basename="categories")
 router.register("menu-items", views.MenuItemViewSet, basename="menu-items")
+# router.register("tables", views.BookingsViewSet, basename="bookings")
 
 urlpatterns = [
+    # Authentication
+    path('api-token-auth/', obtain_auth_token),
+    
     path("", views.home, name="home"),
     path("about", views.about, name="about"),
     path("book", views.book, name="book"),
@@ -16,6 +21,8 @@ urlpatterns = [
     path('menu/<int:pk>', views.SingleMenuItemView.as_view(), name="menu"),
     
     path("api/", include(router.urls)),
+    path("booking/tables", views.BookingsViewSet.as_view({'get': 'list', 'post': 'create'}), name="tables"),
+    
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
     path("cart/menu-items", views.CartView.as_view(), name="cart"),
     path("cart/menu-items/<int:pk>", views.CartItemView.as_view(), name="cart-detail"),

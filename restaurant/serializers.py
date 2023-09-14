@@ -63,14 +63,14 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ["id", "username", "first_name", "last_name", "email", "date_joined", "is_active", "is_staff"]
         read_only_fields = ["first_name", "last_name", "email", "date_joined", "is_active", "is_staff"]
         
-# class MenuSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model: Menu
-#         fields = "__all__"
+class MenuSerializer(serializers.ModelSerializer):
+    class Meta:
+        model: Menu
+        fields = "__all__"
         
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
-        model: Booking
+        model = Booking
         fields = "__all__"
         
 # class UserSerializer(serializers.ModelSerializer):
