@@ -1,6 +1,14 @@
-Username           Email                           Password        token
+In order to get the User Tokens, use the following API:
 
-admin                                               littlelemon     69a56b2504f4737950d8b22414eac575b0a5e0c7
+Endpoint: http://127.0.0.1:8000/auth/token/login
+HTTP Verb: POST
+Headers: Content-Type: application/json
+Body: { "username":"<username>", "password":"<pwd>" }
+
+Username           Email                            Password        token
+admin              admin@littlelemon.com            littlelemon     c9e8ae95a7eadbaadf00808fe401143303503127 
+
+
 admin_littlelemon   admin@littlelemon.com           littlelemon	    61cc1dbe55b6c5cf8e577d30949d8ad70ef30ccd
 deliverycrew        deliverycrew@littlelemon.com	littlelemon     e4361f703a66ad190a752096317d7008cb63e86f
 manager             manager@littlelemon.com         littlelemon     7a595264304803f6026be57322ec3edf734afed0

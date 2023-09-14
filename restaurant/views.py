@@ -71,7 +71,7 @@ def menu(request):
     main_data = {"menu": menu_data}
     return render(request, 'menu.html', {"menu": main_data})
 
-# {url}/littlelemondrp/menu
+# {url}/restaurant/menu
 class MenuItemsView(generics.ListCreateAPIView):
     serializer_class = MenuItemSerializer
     
@@ -79,7 +79,7 @@ class MenuItemsView(generics.ListCreateAPIView):
     def get_queryset(self):
         return MenuItem.objects.all()
 
-# {url}/littlelemondrp/menu/{menuitem_id}
+# {url}/restaurant/menu/{menuitem_id}
 class SingleMenuItemView(generics.RetrieveUpdateDestroyAPIView):
     # queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
@@ -102,6 +102,7 @@ def display_menu_item(request, pk=None):
         menu_item = ""
     return render(request, 'menu_item.html', {"menu_item": menu_item})
 
+# {url}/restaurant/api/categories
 # {url}/api/category
 class CategoryViewSet(viewsets.ModelViewSet):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
@@ -118,7 +119,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
             permission_classes = [IsAuthenticated, IsAdminUser]
         return [permission() for permission in permission_classes]
     
-# {url}/api/menu-items
+# {url}/restaurant/api/menu-items
 class MenuItemViewSet(viewsets.ModelViewSet):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
     queryset = MenuItem.objects.all()
