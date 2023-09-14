@@ -55,6 +55,7 @@ class OrderItem(models.Model):
     
 class Booking(models.Model):
     name = models.CharField(max_length=100, db_index=True, blank=None, null=None)    
+    guests = models.SmallIntegerField()
     date = models.DateField(db_index=True, blank=None, null=None)
     time = models.CharField(max_length=4)
 

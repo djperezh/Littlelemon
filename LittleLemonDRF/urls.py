@@ -11,9 +11,12 @@ urlpatterns = [
     path("about", views.about, name="about"),
     path("book", views.book, name="book"),
     path("bookings", views.bookings, name="bookings"),
-    path("menu", views.menu, name="menu"),
+    # path("menu", views.menu, name="menu"),
+    path('menu/', views.MenuItemsView.as_view(), name="menu"),
+    path('menu/<int:pk>', views.SingleMenuItemView.as_view(), name="menu"),
     
     path("api/", include(router.urls)),
+    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
     path("cart/menu-items", views.CartView.as_view(), name="cart"),
     path("cart/menu-items/<int:pk>", views.CartItemView.as_view(), name="cart-detail"),
     path("cart/orders", views.OrdersView.as_view(), name="orders"),

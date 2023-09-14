@@ -71,13 +71,36 @@ def menu(request):
     main_data = {"menu": menu_data}
     return render(request, 'menu.html', {"menu": main_data})
 
+# {url}/littlelemondrp/menu
+class MenuItemsView(generics.ListCreateAPIView):
+    serializer_class = MenuItemSerializer
+    
+    # GET
+    def get_queryset(self):
+        return MenuItem.objects.all()
+
+# {url}/littlelemondrp/menu/{menuitem_id}
+class SingleMenuItemView(generics.RetrieveUpdateDestroyAPIView):
+    # queryset = MenuItem.objects.all()
+    serializer_class = MenuItemSerializer
+
+    def get_queryset(self):
+        return MenuItem.objects.all()
+    
+    def get_object(self):
+        queryset = self.filter_queryset(self.get_queryset())
+        menuitem = MenuItem.objects.get(pk=self.kwargs["pk"])
+        menuitem_id = menuitem.pk
+        obj = queryset.get(id=menuitem_id)
+        # self.check_object_permissions(self.request, obj)
+        return obj
+
 def display_menu_item(request, pk=None):
     if pk:
-        menu_item = Menu.objects.get(pk=pk)
+        menu_item = MenuItem.objects.get(pk=pk)
     else:
         menu_item = ""
     return render(request, 'menu_item.html', {"menu_item": menu_item})
-
 
 # {url}/api/category
 class CategoryViewSet(viewsets.ModelViewSet):

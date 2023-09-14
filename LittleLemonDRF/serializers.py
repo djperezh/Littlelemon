@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import MenuItem, Category, Cart, Order, OrderItem
+from .models import Menu, MenuItem, Category, Cart, Order, OrderItem, Booking
 from django.contrib.auth.models import User
 
 class CategorySerializer (serializers.ModelSerializer):
@@ -62,3 +62,18 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ["id", "username", "first_name", "last_name", "email", "date_joined", "is_active", "is_staff"]
         read_only_fields = ["first_name", "last_name", "email", "date_joined", "is_active", "is_staff"]
+        
+# class MenuSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model: Menu
+#         fields = "__all__"
+        
+class BookingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model: Booking
+        fields = "__all__"
+        
+# class UserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ['url', 'username', 'email', 'groups']
