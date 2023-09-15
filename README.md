@@ -1,14 +1,24 @@
 # Littlelemon
 Example application in Python using Django Framework
 
-> META BackEnd Developer Specialization By Coursera
+<P>&nbsp;</P>
+<img alt="Climate" src="https://img.shields.io/badge/META BackEnd Developer -Specialization By Coursera-yellowgreen?logoColor=white&style=for-the-badge" />
+<P>&nbsp;</P>
+
+**GitHub Repository: `https://github.com/djperezh/Littlelemon`**
+
 * [Meta - API](https://www.coursera.org/learn/apis?specialization=meta-back-end-developer)
 * [Meta - The Full Stack](https://www.coursera.org/learn/the-full-stack)
 * [Meta - BackEnd Developer Capstone](https://www.coursera.org/learn/back-end-developer-capstone)
 
+<P>&nbsp;</P>
+<img alt="Climate" src="https://img.shields.io/badge/Functional requirement-Rubric-yellowgreen?logoColor=white&style=for-the-badge" />
+<P>&nbsp;</P>
 
-# FrontEnd (Booking) Functional requirement
+<details>
+  <summary>FrontEnd</summary>
 
+```
 1. Is the app added to the installed apps list in the settings file?
 
 2. Is the database configuration updated inside the settings file?
@@ -34,90 +44,108 @@ Example application in Python using Django Framework
 12. Was fetch API used to retrieve data from the API?
 
 13. Is the current date automatically selected when you open the booking form?
+```
 
-## Screeshots
+### Screeshots
 
 ![Book & Reservations](/docs/imgs/bookings.png "Book & Reservations")
 
-### [Run locally - Setup](/docs/run-setup.md)
+</details>
 
-# BackEnd (API) Functional requirement
 
-1. The admin can assign users to the manager group
+<details>
+  <summary>BackEnd</summary>
 
-2.	You can access the manager group with an admin token
+```
+    1. The admin can assign users to the manager group
 
-3.	The admin can add menu items 
+    2.	You can access the manager group with an admin token
 
-4.	The admin can add categories
+    3.	The admin can add menu items 
 
-5.	Managers can log in 
+    4.	The admin can add categories
 
-6.	Managers can update the item of the day
+    5.	Managers can log in 
 
-7.	Managers can assign users to the delivery crew
+    6.	Managers can update the item of the day
 
-8.	Managers can assign orders to the delivery crew
+    7.	Managers can assign users to the delivery crew
 
-9.	The delivery crew can access orders assigned to them
+    8.	Managers can assign orders to the delivery crew
 
-10. The delivery crew can update an order as delivered
+    9.	The delivery crew can access orders assigned to them
 
-11. Customers can register
+    10. The delivery crew can update an order as delivered
 
-12.	Customers can log in using their username and password and get access tokens
+    11. Customers can register
 
-13.	Customers can browse all categories 
+    12.	Customers can log in using their username and password and get access tokens
 
-14.	Customers can browse all the menu items at once
+    13.	Customers can browse all categories 
 
-15.	Customers can browse menu items by category
+    14.	Customers can browse all the menu items at once
 
-16.	Customers can paginate menu items
+    15.	Customers can browse menu items by category
 
-17.	Customers can sort menu items by price
+    16.	Customers can paginate menu items
 
-18.	Customers can add menu items to the cart
+    17.	Customers can sort menu items by price
 
-19.	Customers can access previously added items in the cart
+    18.	Customers can add menu items to the cart
 
-20.	Customers can place orders
+    19.	Customers can access previously added items in the cart
 
-21.	Customers can browse their own orders
+    20.	Customers can place orders
 
-NOTE: See [Rubric](/docs/rubric.md) for more details.
+    21.	Customers can browse their own orders
+```
 
-# Final requirements - Capstone project
+> NOTE: See [Rubric](/docs/rubric.md) for more details.
 
-1. Does the web application use Django to serve static HTML content?
+</details>
 
-2. Has the learner committed the project to a Git repository?
+<details>
+  <summary>Capstone project</summary>
 
-3. Does the application connect the backend to a MySQL database?
+```
+    1. Does the web application use Django to serve static HTML content?
 
-4. Are the menu and table booking APIs implemented?
+    2. Has the learner committed the project to a Git repository?
 
-5. Is the application set up with user registration and authentication?
+    3. Does the application connect the backend to a MySQL database?
 
-6. Does the application contain unit tests?
+    4. Are the menu and table booking APIs implemented?
 
-7. Can the API be tested with the Insomnia REST client?
+    5. Is the application set up with user registration and authentication?
 
-## Endpoints
+    6. Does the application contain unit tests?
 
-_url = "http://127.0.0.1:8000/" for local environment_
+    7. Can the API be tested with the Insomnia REST client?
+```
+</details>
 
-### FrontEnd
+<P>&nbsp;</P>
+<img alt="Climate" src="https://img.shields.io/badge/Endpoints-API-yellowgreen?logoColor=white&style=for-the-badge" />
+<P>&nbsp;</P>
+
+> _url = "http://127.0.0.1:8000/" for local environment_
+
+<details>
+  <summary>FrontEnd</summary>
 ```
 {url}/restaurant/           [name='home']
 {url}/restaurant/about      [name='about']
 {url}/restaurant/book       [name='book']
 {url}/restaurant/bookings   [name='bookings']
 ```
+</details>
 
-### BackEnd API
+
+<details>
+  <summary>BackEnd API</summary>
 
 > Use Browser or Insomia/Postmand to call API's (use {url}/auth/token/login Endpoint to get Token)
+
 ```
 {url}/restaurant/booking/tables                         [name='tables']
 {url}/restaurant/menu/                                  [name='menu']
@@ -142,7 +170,11 @@ _url = "http://127.0.0.1:8000/" for local environment_
 
 ![Users Endpoints](/docs/imgs/users.png "Users Endpoints")
 
-### Dosier generated
+</details>
+
+<details>
+  <summary>Dosier generated</summary>
+
 ```
 {url}/admin/
 {url}/auth/
@@ -151,10 +183,24 @@ _url = "http://127.0.0.1:8000/" for local environment_
 
 ![Djoser Endpoints](/docs/imgs/djoser.png "Djoser Endpoints")
 
+</details>
+
+<details>
+  <summary>Error Handling</summary>
+
 > This enpoins should handle errors by returning the corresponding HTTP status code
 
 ![HTTP status code](/docs/imgs/errors.png "HTTP status code")
 
+</details>
+<P>&nbsp;</P>
+
+<img alt="Climate" src="https://img.shields.io/badge/SetUp-Environment-yellowgreen?logoColor=white&style=for-the-badge" />
+
 ### [Run locally - Setup](/docs/run-setup.md)
 
 ### [Development - Setup](/docs/dev-setup.md)
+
+<P>&nbsp;</P>
+
+> THIS PROJECT IS FOR LEARNING PURPOSES ONLY AND STRICTLY FOR PERSONAL AND PRIVATE USE. YOU CAN USE IT AS REFERENCE ONLY SINCE THIS IS **NOT** `PRODUCTION` QUALITY CODE
