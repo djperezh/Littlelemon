@@ -1,4 +1,4 @@
-# Littlelemon
+# Littlelemon - Restaurant
 Example application in Python using Django Framework
 
 <P>&nbsp;</P>
