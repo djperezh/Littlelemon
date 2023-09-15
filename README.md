@@ -3,16 +3,14 @@
 > Example application in Python using Django Framework
 
 <P>&nbsp;</P>
-<img alt="Climate" src="https://img.shields.io/badge/META BackEnd Developer -Specialization By Coursera-3178C6?logoColor=white&style=for-the-badge" />
 
+<img alt="Climate" src="https://img.shields.io/badge/SetUp-Environment-3178C6?logoColor=white&style=for-the-badge" />
 
-**GitHub Repository: `https://github.com/djperezh/Littlelemon`**
-
-* [Meta - API](https://www.coursera.org/learn/apis?specialization=meta-back-end-developer)
-* [Meta - The Full Stack](https://www.coursera.org/learn/the-full-stack)
-* [Meta - BackEnd Developer Capstone](https://www.coursera.org/learn/back-end-developer-capstone)
+* [Run locally - Setup](/docs/run-setup.md)
+* [Development - Setup](/docs/dev-setup.md)
 
 <P>&nbsp;</P>
+
 <img alt="Climate" src="https://img.shields.io/badge/Functional requirement-Rubric-3178C6?logoColor=white&style=for-the-badge" />
 
 <details>
@@ -130,12 +128,14 @@
 
 <details>
   <summary>FrontEnd</summary>
+
 ```
 {url}/restaurant/           [name='home']
 {url}/restaurant/about      [name='about']
 {url}/restaurant/book       [name='book']
 {url}/restaurant/bookings   [name='bookings']
 ```
+
 </details>
 
 <details>
@@ -190,13 +190,14 @@
 ![HTTP status code](/docs/imgs/errors.png "HTTP status code")
 
 </details>
+
 <P>&nbsp;</P>
 
-<img alt="Climate" src="https://img.shields.io/badge/SetUp-Environment-3178C6?logoColor=white&style=for-the-badge" />
+<img alt="Climate" src="https://img.shields.io/badge/META BackEnd Developer -Specialization By Coursera-3178C6?logoColor=white&style=for-the-badge" />
 
-### [Run locally - Setup](/docs/run-setup.md)
-
-### [Development - Setup](/docs/dev-setup.md)
+* [Meta - API](https://www.coursera.org/learn/apis?specialization=meta-back-end-developer)
+* [Meta - The Full Stack](https://www.coursera.org/learn/the-full-stack)
+* [Meta - BackEnd Developer Capstone](https://www.coursera.org/learn/back-end-developer-capstone)
 
 <P>&nbsp;</P>
 
