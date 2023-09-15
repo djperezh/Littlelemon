@@ -10,7 +10,7 @@ router.register("menu-items", views.MenuItemViewSet, basename="menu-items")
 
 urlpatterns = [
     # Authentication
-    path('api-token-auth/', obtain_auth_token),
+    # path('api-token-auth/', obtain_auth_token),
     
     path("", views.home, name="home"),
     path("about", views.about, name="about"),

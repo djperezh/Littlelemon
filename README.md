@@ -1,10 +1,11 @@
 # Littlelemon
 Example application in Python using Django Framework
 
-By Coursera:
+> META BackEnd Developer Specialization By Coursera
 * [Meta - API](https://www.coursera.org/learn/apis?specialization=meta-back-end-developer)
-
 * [Meta - The Full Stack](https://www.coursera.org/learn/the-full-stack)
+* [Meta - BackEnd Developer Capstone](https://www.coursera.org/learn/back-end-developer-capstone)
+
 
 # FrontEnd (Booking) Functional requirement
 
@@ -86,23 +87,72 @@ By Coursera:
 
 NOTE: See [Rubric](/docs/rubric.md) for more details.
 
+# Final requirements - Capstone project
+
+1. Does the web application use Django to serve static HTML content?
+
+2. Has the learner committed the project to a Git repository?
+
+3. Does the application connect the backend to a MySQL database?
+
+4. Are the menu and table booking APIs implemented?
+
+5. Is the application set up with user registration and authentication?
+
+6. Does the application contain unit tests?
+
+7. Can the API be tested with the Insomnia REST client?
+
 ## Endpoints
 
-![Menu Items Endpoints](/docs/imgs/menu-items.png "Menu Items Endpoints")
+_url = "http://127.0.0.1:8000/" for local environment_
 
-![order Endpoints](/docs/imgs/order.png "Order Enpoints")
+### FrontEnd
+```
+{url}/restaurant/           [name='home']
+{url}/restaurant/about      [name='about']
+{url}/restaurant/book       [name='book']
+{url}/restaurant/bookings   [name='bookings']
+```
+
+### BackEnd API
+
+> Use Browser or Insomia/Postmand to call API's (use {url}/auth/token/login Endpoint to get Token)
+```
+{url}/restaurant/booking/tables                         [name='tables']
+{url}/restaurant/menu/                                  [name='menu']
+{url}/restaurant/menu/{menuitem_id}                     [name='menu']
+{url}/restaurant/api/menu-items                         [name='menu-items-list']
+{url}/restaurant/api/menu-items/{menuitem_id}           [name='menuitem-detail']
+{url}/restaurant/api/categories                         [name='categories-list']
+{url}/restaurant/api/categories/{category_id}           [name='category-detail']
+{url}/restaurant/cart/menu-items                        [name='cart']
+{url}/restaurant/cart/menu-items/{cartitem_id}          [name='cartitem-detail']
+{url}/restaurant/cart/orders                            [name='orders']
+{url}/restaurant/cart/orders/{oredr_id}                 [name='orders-detail']
+{url}/restaurant/groups/manager/users                   [name='manager']
+{url}/restaurant/groups/manager/users/{user_id}         [name='manager-detail']
+{url}/restaurant/groups/delivery-crew/users             [name='delivery-crew']
+{url}/restaurant/groups/delivery-crew/users/{user_id}   [name='delivery-crew-detail']
+```
+
+![Order Endpoints](/docs/imgs/order.png "Order Enpoints")
 
 ![Cart Endpoints](/docs/imgs/cart.png "Cart Endpoints")
 
 ![Users Endpoints](/docs/imgs/users.png "Users Endpoints")
 
-* NOTE: Use djoiser for creating these Endpoints
-![Djosier Endpoints](/docs/imgs/djosier.png "Djosier Endpoints")
+### Dosier generated
+```
+{url}/admin/
+{url}/auth/
+{url}/auth/
+```
 
+![Djoser Endpoints](/docs/imgs/djoser.png "Djoser Endpoints")
 
-![Groups Endpoints](/docs/imgs/groups.png "Groups Endpoints")
+> This enpoins should handle errors by returning the corresponding HTTP status code
 
-* This enpoins should handle errors by returning the corresponding HTTP status code
 ![HTTP status code](/docs/imgs/errors.png "HTTP status code")
 
 ### [Run locally - Setup](/docs/run-setup.md)
