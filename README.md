@@ -1,9 +1,10 @@
 # Littlelemon - Restaurant
-Example application in Python using Django Framework
+
+> Example application in Python using Django Framework
 
 <P>&nbsp;</P>
-<img alt="Climate" src="https://img.shields.io/badge/META BackEnd Developer -Specialization By Coursera-yellowgreen?logoColor=white&style=for-the-badge" />
-<P>&nbsp;</P>
+<img alt="Climate" src="https://img.shields.io/badge/META BackEnd Developer -Specialization By Coursera-3178C6?logoColor=white&style=for-the-badge" />
+
 
 **GitHub Repository: `https://github.com/djperezh/Littlelemon`**
 
@@ -12,8 +13,7 @@ Example application in Python using Django Framework
 * [Meta - BackEnd Developer Capstone](https://www.coursera.org/learn/back-end-developer-capstone)
 
 <P>&nbsp;</P>
-<img alt="Climate" src="https://img.shields.io/badge/Functional requirement-Rubric-yellowgreen?logoColor=white&style=for-the-badge" />
-<P>&nbsp;</P>
+<img alt="Climate" src="https://img.shields.io/badge/Functional requirement-Rubric-3178C6?logoColor=white&style=for-the-badge" />
 
 <details>
   <summary>FrontEnd</summary>
@@ -51,7 +51,6 @@ Example application in Python using Django Framework
 ![Book & Reservations](/docs/imgs/bookings.png "Book & Reservations")
 
 </details>
-
 
 <details>
   <summary>BackEnd</summary>
@@ -125,8 +124,7 @@ Example application in Python using Django Framework
 </details>
 
 <P>&nbsp;</P>
-<img alt="Climate" src="https://img.shields.io/badge/Endpoints-API-yellowgreen?logoColor=white&style=for-the-badge" />
-<P>&nbsp;</P>
+<img alt="Climate" src="https://img.shields.io/badge/Endpoints-API-3178C6?logoColor=white&style=for-the-badge" />
 
 > _url = "http://127.0.0.1:8000/" for local environment_
 
@@ -139,7 +137,6 @@ Example application in Python using Django Framework
 {url}/restaurant/bookings   [name='bookings']
 ```
 </details>
-
 
 <details>
   <summary>BackEnd API</summary>
@@ -195,7 +192,7 @@ Example application in Python using Django Framework
 </details>
 <P>&nbsp;</P>
 
-<img alt="Climate" src="https://img.shields.io/badge/SetUp-Environment-yellowgreen?logoColor=white&style=for-the-badge" />
+<img alt="Climate" src="https://img.shields.io/badge/SetUp-Environment-3178C6?logoColor=white&style=for-the-badge" />
 
 ### [Run locally - Setup](/docs/run-setup.md)
 
