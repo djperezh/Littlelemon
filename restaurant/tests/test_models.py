@@ -2,16 +2,25 @@ from django.test import TestCase
 from restaurant.models import MenuItem, Category
 
 class MenuItemTest(TestCase):
-    def test_get_item(self):
-        # category = Category.objects.get(pk=3)
-        item = MenuItem.objects.create(
-                title = "IceCream",
-                price = 3,
-                inventory = "3",
-                featured = False,
-                category_id = 2
-        )
-        itemstr = item.get_item()
+    def test_create_menuitem(self):
+        # Arrange
+        expected_menuitem_title = "Menu Item Test"
+        expected_category_title = "Category Test"
+
+        # Act
+        category_obj = Category.objects.create(title=expected_category_title)
+        menuitem_obj = MenuItem.objects.create(title = expected_menuitem_title,price = 1.23,inventory = "123",featured = False,category_id = category_obj.id)
         
-        self.assertEqual(itemstr, "IceCream : 3")
+        # Assert
+        self.assertEqual(menuitem_obj.title, expected_menuitem_title)
+
+class CategoryTest(TestCase):
+    def test_create_category(self):
+        # Arrange
+        expected_category_title = "Category Test"
         
+        # Act
+        category_obj = Category.objects.create(title=expected_category_title)
+        
+        # Assert
+        self.assertEqual(category_obj.title, expected_category_title)
